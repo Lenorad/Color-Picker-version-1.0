@@ -3,7 +3,6 @@
 #include <sstream>
 #include <math.h>
 #include <string>
-#include "resource.h"
 #define PI 3.1415926
 
 static int resolution = 2;
@@ -114,14 +113,7 @@ int main()
 	int Hue = RGBToHue(SelectedColor);
 	float Sat = 1;
 	float Val = 1;
-	// Color Pointers
-	uint8_t* PtrRed = &(SelectedColor.r);
-	uint8_t* PtrGreen = &(SelectedColor.g);
-	uint8_t* PtrBlue= &(SelectedColor.b);
-	int* PtrHue = &Hue;
-	float* PtrSaturation = &Sat;
-	float* PtrValue = &Val;
-
+	
 	// ColorTable
 	sf::Vector2f sp(15, 15);
 	sf::Vertex* colortable;
@@ -145,12 +137,12 @@ int main()
 	Text.setCharacterSize(30);
 	struct ColorCodes codes[] =
 	{
-		{"Red", addSpaces(std::to_string(*PtrRed))  },
-		{"Hue", addSpaces(std::to_string(*PtrHue))},
-		{"Green", addSpaces(std::to_string(*PtrGreen))},
-		{"Saturation", addSpaces(std::to_string(int(*PtrSaturation * 100)))},
-		{"Blue", addSpaces(std::to_string(*PtrBlue))},
-		{"Value", addSpaces(std::to_string(int(*PtrValue * 100)))}
+		{"Red", addSpaces(std::to_string(SelectedColor.r))  },
+		{"Hue", addSpaces(std::to_string(Hue))},
+		{"Green", addSpaces(std::to_string(SelectedColor.g))},
+		{"Saturation", addSpaces(std::to_string(int(Sat * 100)))},
+		{"Blue", addSpaces(std::to_string(SelectedColor.b))},
+		{"Value", addSpaces(std::to_string(int(Val * 100)))}
 	};
 	Update_text(Text, codes, Hue, Sat, Val);
 
@@ -202,8 +194,6 @@ int main()
 			}
 			if (event.type == sf::Event::MouseWheelScrolled)
 			{
-				SelectedColor.r -= 1;
-				Update_text(Text, codes, Hue, circle.Saturation, circle.Value);
 				double elapsed;
 				int scroll_increment;
 				float delta = event.mouseWheelScroll.delta;
@@ -478,7 +468,7 @@ void Update_text(sf::Text& txt, ColorCodes* ccd, const int& hue, const float& sa
 	ccd[4].value = addSpaces(std::to_string(Blu));
 	ccd[5].value = addSpaces(std::to_string(int(Val* 100)));
 
-	osstr << ccd[0].name << "   \t" << ccd[0].value << "\t\t" << ccd[1].name << "   \t\t" << ccd[1].value << '°' << "\n" << std::endl;
+	osstr << ccd[0].name << "   \t" << ccd[0].value << "\t\t" << ccd[1].name << "   \t\t" << ccd[1].value << 'Â°' << "\n" << std::endl;
 	osstr << ccd[2].name << "\t" << ccd[2].value << "\t\t" << ccd[3].name << "  " << ccd[3].value << '%' << "\n" << std::endl;
 	osstr << ccd[4].name << "   \t" << ccd[4].value << "\t\t" << ccd[5].name << "\t\t" << ccd[5].value << '%' << std::endl;
 
