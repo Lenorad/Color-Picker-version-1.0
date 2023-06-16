@@ -388,7 +388,6 @@ int RGBToHue(sf::Color rgb)
 }
 sf::Vertex* Get_ColorTable(sf::Color PrimaryColor)
 {
-	int resolution = 2;
 	sf::Vector2f starting_pos(15, 15);
 
 	sf::Vertex* colortable = new sf::Vertex[510* resolution]{ };
@@ -412,7 +411,6 @@ sf::Vertex* Get_ColorTable(sf::Color PrimaryColor)
 }
 sf::Vertex* Get_ColorHue()
 {
-	int resolution = 2;
 	sf::Vector2f starting_pos(580, 15);
 
 	sf::Vertex* colorhue = new sf::Vertex[720 * resolution]{ };
@@ -438,7 +436,6 @@ sf::Color Update(sf::Vector2f tripo, sf::Color Pcolor, sf::Vertex* Ctable, Trian
 }
 void Update_ColorTable(sf::Color PrimaryColor, sf::Vertex* colortable)
 {
-	int resolution = 2;
 	const sf::Color PColor = PrimaryColor;
 
 	float X = 0.0f;
